@@ -3,7 +3,7 @@ i w i
 w s w
 i w i
 
-i=iron; w=wool; s=fermented spider eye;
+i=iron bar; w=wool; s=fermented spider eye;
 
 Gas Amplifier:
 i s i
