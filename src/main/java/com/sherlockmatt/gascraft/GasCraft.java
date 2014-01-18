@@ -28,6 +28,7 @@ public class GasCraft
     	GameRegistry.registerBlock(new BlockGasCreator(), "GasCreator");
     	GameRegistry.registerBlock(new BlockGasDistributor(), "GasDistributor");
     	GameRegistry.registerBlock(new BlockGasAmplifier(), "GasAmplifier");
+    	GameRegistry.registerBlock(new BlockMiningGas(), "MiningGas");
     	
     	CraftingRecipes.init();
     	
