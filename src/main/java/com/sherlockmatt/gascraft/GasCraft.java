@@ -3,6 +3,7 @@ package com.sherlockmatt.gascraft;
 import net.minecraft.creativetab.CreativeTabs;
 
 import com.sherlockmatt.gascraft.block.*;
+import com.sherlockmatt.helpers.CraftingRecipes;
 import com.sherlockmatt.helpers.CreativeTabsGC;
 
 import cpw.mods.fml.common.Mod;
@@ -27,6 +28,9 @@ public class GasCraft
     	GameRegistry.registerBlock(new BlockGasCreator(), "GasCreator");
     	GameRegistry.registerBlock(new BlockGasDistributor(), "GasDistributor");
     	GameRegistry.registerBlock(new BlockGasAmplifier(), "GasAmplifier");
+    	
+    	CraftingRecipes.init();
+    	
 		System.out.println("GasCraft version " + GasCraft.VERSION + " has been initialised correctly.");
     }
     

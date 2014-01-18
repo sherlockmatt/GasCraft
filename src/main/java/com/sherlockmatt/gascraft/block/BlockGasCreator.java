@@ -5,7 +5,6 @@ import com.sherlockmatt.gascraft.GasCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemStack;
 
 public class BlockGasCreator extends Block {
 	
@@ -22,8 +21,4 @@ public class BlockGasCreator extends Block {
         this.field_149761_L = par1IconRegister.registerIcon("gascraft:gascreator");
     }
 	
-	protected ItemStack func_149644_j()
-    {
-            return new ItemStack(this, 1, 0);
-    }
 }
