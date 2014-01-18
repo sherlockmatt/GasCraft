@@ -1,0 +1,34 @@
+Gas creator:
+i w i
+w s w
+i w i
+
+i=iron; w=wool; s=fermented spider eye;
+
+Gas Amplifier:
+i s i
+s g s
+i s i
+
+i=iron bar; s=string; g=glass;
+
+Gas Distributor:
+l g l
+g c g
+l g l
+
+l=leather; g=glass; c=chest;
+
+Gas Tube:
+p l p
+b s b
+p l p
+
+p=glass pane; l=leather; b=iron bars; s=string;
+
+Gas Processor:
+s w s
+t f t
+s p s
+
+s=stone; w=water bucket; t=Tube; f=furnace; p=piston;
