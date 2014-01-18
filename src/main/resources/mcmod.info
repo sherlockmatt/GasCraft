@@ -1,0 +1,16 @@
+[
+{
+  "modid": "gascraft",
+  "name": "GasCraft",
+  "description": "<Add this later>",
+  "version": "1.0",
+  "mcversion": "1.7.4",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["sherlockmatt","robfd"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
