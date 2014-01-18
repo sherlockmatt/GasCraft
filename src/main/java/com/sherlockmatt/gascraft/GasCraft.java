@@ -7,7 +7,7 @@ import com.sherlockmatt.helpers.CreativeTabsGC;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = GasCraft.MODID, version = GasCraft.VERSION, name = GasCraft.NAME)
@@ -20,7 +20,7 @@ public class GasCraft
     public static CreativeTabs tabGasCraft;
     
     @EventHandler
-    public void preInit(FMLInitializationEvent event)
+    public void preInit(FMLPreInitializationEvent event)
     {
     	tabGasCraft = new CreativeTabsGC(CreativeTabs.getNextID(), "tabGasCraft");
     	

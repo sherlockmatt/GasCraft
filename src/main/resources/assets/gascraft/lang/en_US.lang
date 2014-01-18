@@ -1,0 +1,5 @@
+tile.GasCreator.name=Gas Creator
+tile.GasDistributor.name=Gas Distributor
+tile.GasAmplifier.name=Gas Amplifier
+
+itemGroup.tabGasCraft=Gas Craft
