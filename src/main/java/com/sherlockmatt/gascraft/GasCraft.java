@@ -5,6 +5,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import com.sherlockmatt.gascraft.block.*;
 import com.sherlockmatt.helpers.CraftingRecipes;
 import com.sherlockmatt.helpers.CreativeTabsGC;
+import com.sherlockmatt.gascraft.helpers.GuiHandler;
+import com.sherlockmatt.gascraft.tileentity.TileEntityGasAmplifier;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -29,6 +31,10 @@ public class GasCraft
     	GameRegistry.registerBlock(new BlockGasDistributor(), "GasDistributor");
     	GameRegistry.registerBlock(new BlockGasAmplifier(), "GasAmplifier");
     	GameRegistry.registerBlock(new BlockMiningGas(), "MiningGas");
+
+    	GameRegistry.registerTileEntity(TileEntityGasAmplifier.class, "GasAmplifier");
+    	
+    	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
     	
     	CraftingRecipes.init();
     	
