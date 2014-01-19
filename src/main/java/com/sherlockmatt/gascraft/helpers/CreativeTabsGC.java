@@ -1,4 +1,4 @@
-package com.sherlockmatt.helpers;
+package com.sherlockmatt.gascraft.helpers;
 
 import com.sherlockmatt.gascraft.GasCraft;
 import cpw.mods.fml.common.registry.GameRegistry;
