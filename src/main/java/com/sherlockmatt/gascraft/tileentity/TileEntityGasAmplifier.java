@@ -97,7 +97,8 @@ public class TileEntityGasAmplifier extends TileEntity implements IInventory
         	itemstack.stackSize = this.getInventoryStackLimit();
         }
 
-        //this.onInventoryChanged(); might be updateEntity()?
+        this.updateEntity();
+        //this.onInventoryChanged(); might be updateEntity()? Probably
 	}
 
 	@Override
@@ -118,18 +119,18 @@ public class TileEntityGasAmplifier extends TileEntity implements IInventory
 	@Override
 	public void readFromNBT(NBTTagCompound nbtdata) //Uh, what? Pls fix.
     {
-        super.func_145839_a(nbtdata);
-        NBTTagList nbttaglist = nbtdata.func_150295_c("Items", 10);
+        super.readFromNBT(nbtdata);
+        NBTTagList nbttaglist = nbtdata.getTagList("Items", 10);
         this.items = new ItemStack[this.getSizeInventory()];
 
-        if (nbtdata.func_150297_b("CustomName", 8))
+        if (nbtdata.hasKey("CustomName", 8))
         {
             this.containerName = nbtdata.getString("CustomName");
         }
 
         for (int i = 0; i < nbttaglist.tagCount(); ++i)
         {
-            NBTTagCompound nbttagcompound1 = nbttaglist.func_150305_b(i);
+            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
             int j = nbttagcompound1.getByte("Slot") & 255;
 
             if (j >= 0 && j < this.items.length)
@@ -142,7 +143,7 @@ public class TileEntityGasAmplifier extends TileEntity implements IInventory
 	@Override
 	public void writeToNBT(NBTTagCompound nbtdata) //sjdfjsnfjsnjn. I'M PANICKING!
     {
-        super.func_145841_b(nbtdata);
+        super.writeToNBT(nbtdata);
         NBTTagList nbttaglist = new NBTTagList();
 
         for (int i = 0; i < this.items.length; ++i)
@@ -158,7 +159,7 @@ public class TileEntityGasAmplifier extends TileEntity implements IInventory
 
         nbtdata.setTag("Items", nbttaglist);
 
-        if (this.func_145818_k_())
+        if (this.hasCustomInventoryName())
         {
         	nbtdata.setString("CustomName", this.containerName);
         }
