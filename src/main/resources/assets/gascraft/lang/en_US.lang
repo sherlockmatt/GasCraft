@@ -1,5 +1,8 @@
 tile.GasCreator.name=Gas Creator
 tile.GasDistributor.name=Gas Distributor
 tile.GasAmplifier.name=Gas Amplifier
+tile.MiningGas.name=Mining Gas
+
+container.GasAmplifier=Gas Amplifier
 
 itemGroup.tabGasCraft=Gas Craft
