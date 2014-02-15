@@ -14,7 +14,7 @@ public class CreativeTabsGC extends CreativeTabs
         }
 
         @Override
-        public ItemStack func_151244_d() 
+        public ItemStack getIconItemStack()
         {
                 return new ItemStack(GameRegistry.findItem(GasCraft.MODID, "GasCreator"), 1, 0);
         }

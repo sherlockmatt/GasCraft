@@ -10,15 +10,15 @@ public class BlockGasDistributor extends Block {
 
 	public BlockGasDistributor()
 	{
-		super(Material.field_151576_e);
-		this.func_149647_a(GasCraft.tabGasCraft);
-		this.func_149663_c("GasDistributor");
+		super(Material.rock);
+		this.setCreativeTab(GasCraft.tabGasCraft);
+		this.setBlockName("GasDistributor");
 	}
 	
 	@Override
-	public void func_149651_a(IIconRegister par1IconRegister)
+	public void registerBlockIcons(IIconRegister par1IconRegister)
     {
-        this.field_149761_L = par1IconRegister.registerIcon("gascraft:gasdistributor");
+        this.blockIcon = par1IconRegister.registerIcon("gascraft:gasdistributor");
     }
 	
 }

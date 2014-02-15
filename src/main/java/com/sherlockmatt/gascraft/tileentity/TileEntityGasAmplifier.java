@@ -36,7 +36,11 @@ public class TileEntityGasAmplifier extends TileEntity implements IInventory
             {
                 itemstack = this.items[slot];
                 this.items[slot] = null;
+<<<<<<< HEAD
                 this.onInventoryChanged();
+=======
+                //this.onInventoryChanged(); might be updateEntity()?
+>>>>>>> origin/dev2_mappings
                 return itemstack;
             }
             else
@@ -48,7 +52,11 @@ public class TileEntityGasAmplifier extends TileEntity implements IInventory
                     this.items[slot] = null;
                 }
 
+<<<<<<< HEAD
                 this.onInventoryChanged();
+=======
+                //this.onInventoryChanged(); might be updateEntity()?
+>>>>>>> origin/dev2_mappings
                 return itemstack;
             }
         }
@@ -97,6 +105,7 @@ public class TileEntityGasAmplifier extends TileEntity implements IInventory
         	itemstack.stackSize = this.getInventoryStackLimit();
         }
 
+<<<<<<< HEAD
         this.onInventoryChanged();		
 	}
 
@@ -112,11 +121,32 @@ public class TileEntityGasAmplifier extends TileEntity implements IInventory
 
 	@Override
 	public boolean func_145818_k_() { //Check if container name is assigned. Was field_145981_s
+=======
+        //this.onInventoryChanged(); might be updateEntity()?
+	}
+
+	@Override
+	public String getInventoryName() {
+		return this.hasCustomInventoryName() ? this.containerName : "container.gasamplifier"; //Used to be func_145818_k_, now hasCustomInventoryName()
+	}
+	
+	/*public void func_146018_a(String containerName) //Don't think this is necessary
+    {
+        this.containerName = containerName;
+    }*/
+
+	@Override
+	public boolean hasCustomInventoryName() {
+>>>>>>> origin/dev2_mappings
 		return this.containerName != null && this.containerName.length() > 0;
 	}
 	
 	@Override
+<<<<<<< HEAD
 	public void func_145839_a(NBTTagCompound nbtdata) //Load from NBT. nbtdata was p_145839_1_
+=======
+	public void readFromNBT(NBTTagCompound nbtdata) //Uh, what? Pls fix.
+>>>>>>> origin/dev2_mappings
     {
         super.func_145839_a(nbtdata);
         NBTTagList nbttaglist = nbtdata.func_150295_c("Items", 10);
@@ -140,7 +170,11 @@ public class TileEntityGasAmplifier extends TileEntity implements IInventory
     }
 	
 	@Override
+<<<<<<< HEAD
 	public void func_145841_b(NBTTagCompound nbtdata) //Save to NBT. nbtdata was p_145841_1_
+=======
+	public void writeToNBT(NBTTagCompound nbtdata) //sjdfjsnfjsnjn. I'M PANICKING!
+>>>>>>> origin/dev2_mappings
     {
         super.func_145841_b(nbtdata);
         NBTTagList nbttaglist = new NBTTagList();
@@ -165,18 +199,31 @@ public class TileEntityGasAmplifier extends TileEntity implements IInventory
     }
 	
 	@Override
+<<<<<<< HEAD
 	public int getInventoryStackLimit() { //Stack size limit
+=======
+	public int getInventoryStackLimit() {
+>>>>>>> origin/dev2_mappings
 		return 1;
 	}
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer EntityPlayer) {
+<<<<<<< HEAD
 		return this.field_145850_b.func_147438_o(this.field_145851_c, this.field_145848_d, this.field_145849_e) != this ? false : EntityPlayer.getDistanceSq((double)this.field_145851_c + 0.5D, (double)this.field_145848_d + 0.5D, (double)this.field_145849_e + 0.5D) <= 64.0D;
 	}
 
 	public void openChest() {}
 
 	public void closeChest() {}
+=======
+		return this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+	}
+
+	public void openInventory() {}
+
+	public void closeInventory() {}
+>>>>>>> origin/dev2_mappings
 
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack) { //No automated item swapping.
 		return false;
