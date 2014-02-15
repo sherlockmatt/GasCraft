@@ -19,7 +19,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 @Mod(modid = GasCraft.MODID, version = GasCraft.VERSION, name = GasCraft.NAME)
 public class GasCraft
 {
-	@Instance("GasCraft")
+	@Instance("gascraft")
 	public static GasCraft instance;
     public static final String MODID = "gascraft";
     public static final String VERSION = "1.0";
