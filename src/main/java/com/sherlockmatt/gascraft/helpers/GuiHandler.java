@@ -14,22 +14,28 @@ public class GuiHandler implements IGuiHandler {
 		
         @Override
         public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        	System.out.println(id);
-        	TileEntity tileEntity = (TileEntity) world.getTileEntity(x, y, z);
-            if(tileEntity instanceof TileEntityGasAmplifier){
-            	return new ContainerGasAmplifier(player.inventory, (TileEntityGasAmplifier) tileEntity);
+            TileEntity tileEntity = world.getTileEntity(x, y, z);
+            switch (id) {
+                case 0:
+                    if(tileEntity instanceof TileEntityGasAmplifier){
+                    	return new ContainerGasAmplifier(player.inventory, (TileEntityGasAmplifier) tileEntity);
+                    }
+                default:
+                    return null;
             }
-            return null;
         }
 
         //returns an instance of the Gui you made earlier
         @Override
         public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        	System.out.println(id);
-        	TileEntity tileEntity = (TileEntity) world.getTileEntity(x, y, z);
-            if(tileEntity instanceof TileEntityGasAmplifier){
-            	return new GuiGasAmplifier(player.inventory, (TileEntityGasAmplifier) tileEntity);
+        	TileEntity tileEntity = world.getTileEntity(x, y, z);
+            switch (id) {
+                case 0:
+                    if(tileEntity instanceof TileEntityGasAmplifier){
+                    	return new GuiGasAmplifier(player.inventory, (TileEntityGasAmplifier) tileEntity);
+                    }
+                default:
+                    return null;
             }
-            return null;
         }
 }
