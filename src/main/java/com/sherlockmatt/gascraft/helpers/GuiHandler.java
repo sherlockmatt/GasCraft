@@ -15,11 +15,7 @@ public class GuiHandler implements IGuiHandler {
         @Override
         public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         	System.out.println(id);
-<<<<<<< HEAD
-        	TileEntity tileEntity = (TileEntity) world.func_147438_o(x, y, z);
-=======
         	TileEntity tileEntity = (TileEntity) world.getTileEntity(x, y, z);
->>>>>>> origin/dev2_mappings
             if(tileEntity instanceof TileEntityGasAmplifier){
             	return new ContainerGasAmplifier(player.inventory, (TileEntityGasAmplifier) tileEntity);
             }
@@ -30,11 +26,7 @@ public class GuiHandler implements IGuiHandler {
         @Override
         public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         	System.out.println(id);
-<<<<<<< HEAD
-        	TileEntity tileEntity = (TileEntity) world.func_147438_o(x, y, z);
-=======
         	TileEntity tileEntity = (TileEntity) world.getTileEntity(x, y, z);
->>>>>>> origin/dev2_mappings
             if(tileEntity instanceof TileEntityGasAmplifier){
             	return new GuiGasAmplifier(player.inventory, (TileEntityGasAmplifier) tileEntity);
             }

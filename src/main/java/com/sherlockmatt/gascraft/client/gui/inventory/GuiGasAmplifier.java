@@ -36,11 +36,7 @@ public class GuiGasAmplifier extends GuiContainer
     }
 
     @Override
-<<<<<<< HEAD
-    protected void func_146976_a(float p_146976_1_, int p_146976_2_, int p_146976_3_)
-=======
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_)
->>>>>>> origin/dev2_mappings
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         System.out.println("About to bind");

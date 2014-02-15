@@ -90,10 +90,6 @@ public class ContainerGasAmplifier extends Container
     public void onContainerClosed(EntityPlayer par1EntityPlayer)
     {
         super.onContainerClosed(par1EntityPlayer);
-<<<<<<< HEAD
-        this.field_94538_a.closeChest();
-=======
         this.field_94538_a.closeInventory();
->>>>>>> origin/dev2_mappings
     }
 }

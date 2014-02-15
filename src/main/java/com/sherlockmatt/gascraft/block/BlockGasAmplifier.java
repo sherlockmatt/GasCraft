@@ -21,13 +21,8 @@ public class BlockGasAmplifier extends Block implements ITileEntityProvider {
 	}
 	
 	@Override
-<<<<<<< HEAD
-	public boolean func_149727_a(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-		TileEntityGasAmplifier tileEntity = (TileEntityGasAmplifier) world.func_147438_o(x, y, z);
-=======
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
 		TileEntityGasAmplifier tileEntity = (TileEntityGasAmplifier) world.getTileEntity(x, y, z);
->>>>>>> origin/dev2_mappings
 		if (tileEntity == null || player.isSneaking()) {
             return false;
 		}
@@ -36,26 +31,12 @@ public class BlockGasAmplifier extends Block implements ITileEntityProvider {
 	}
 	
 	@Override
-<<<<<<< HEAD
-	public void func_149651_a(IIconRegister par1IconRegister)
-=======
 	public void registerBlockIcons(IIconRegister par1IconRegister)
->>>>>>> origin/dev2_mappings
     {
         this.blockIcon = par1IconRegister.registerIcon("gascraft:gasamplifier");
     }
 	
 	@Override
-<<<<<<< HEAD
-	public TileEntity createTileEntity(World world, int metadata) {
-        return new TileEntityGasAmplifier();
-	}
-
-	@Override
-	public TileEntity func_149915_a(World var1, int var2) {
-		return new TileEntityGasAmplifier();
-	}
-=======
 	public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityGasAmplifier();
 	}
@@ -66,5 +47,4 @@ public class BlockGasAmplifier extends Block implements ITileEntityProvider {
 	public TileEntity func_149915_a(World var1, int var2) {
 		return new TileEntityGasAmplifier();
 	}*/
->>>>>>> origin/dev2_mappings
 }
