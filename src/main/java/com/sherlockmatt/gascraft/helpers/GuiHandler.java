@@ -20,9 +20,11 @@ public class GuiHandler implements IGuiHandler {
                     if(tileEntity instanceof TileEntityGasAmplifier){
                     	return new ContainerGasAmplifier(player.inventory, (TileEntityGasAmplifier) tileEntity);
                     }
+                    break;
                 default:
                     return null;
             }
+            return null;
         }
 
         //returns an instance of the Gui you made earlier
@@ -34,8 +36,10 @@ public class GuiHandler implements IGuiHandler {
                     if(tileEntity instanceof TileEntityGasAmplifier){
                     	return new GuiGasAmplifier(player.inventory, (TileEntityGasAmplifier) tileEntity);
                     }
+                    break;
                 default:
                     return null;
             }
+            return null;
         }
 }
