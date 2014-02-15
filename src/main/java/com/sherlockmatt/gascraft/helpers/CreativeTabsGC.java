@@ -1,4 +1,4 @@
-package com.sherlockmatt.helpers;
+package com.sherlockmatt.gascraft.helpers;
 
 import com.sherlockmatt.gascraft.GasCraft;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -14,7 +14,7 @@ public class CreativeTabsGC extends CreativeTabs
         }
 
         @Override
-        public ItemStack func_151244_d() 
+        public ItemStack getIconItemStack()
         {
                 return new ItemStack(GameRegistry.findItem(GasCraft.MODID, "GasCreator"), 1, 0);
         }
