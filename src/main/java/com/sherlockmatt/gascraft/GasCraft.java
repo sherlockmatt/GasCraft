@@ -1,5 +1,6 @@
 package com.sherlockmatt.gascraft;
 
+import com.sherlockmatt.gascraft.tileentity.TileEntityGasDistributor;
 import net.minecraft.creativetab.CreativeTabs;
 
 import com.sherlockmatt.gascraft.block.*;
@@ -39,6 +40,7 @@ public class GasCraft
     	GameRegistry.registerBlock(new BlockMiningGas(), "MiningGas");
 
     	GameRegistry.registerTileEntity(TileEntityGasAmplifier.class, "GasAmplifier");
+        GameRegistry.registerTileEntity(TileEntityGasDistributor.class, "GasDistributor");
     	GameRegistry.registerTileEntity(TileEntityGasCreator.class, "GasCreator");
     	
     	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());

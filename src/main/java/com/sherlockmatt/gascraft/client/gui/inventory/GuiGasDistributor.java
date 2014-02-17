@@ -7,27 +7,27 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
-import com.sherlockmatt.gascraft.inventory.ContainerGasAmplifier;
+import com.sherlockmatt.gascraft.inventory.ContainerGasDistributor;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiGasAmplifier extends GuiContainer
+public class GuiGasDistributor extends GuiContainer
 {
     private static final ResourceLocation field_147085_u = new ResourceLocation("gascraft", "textures/gui/gasamplifier1.png");
     private IInventory playerInvent;
     private IInventory chestInvent;
 
-    public GuiGasAmplifier(InventoryPlayer par1InventoryPlayer, IInventory par2IInventory)
+    public GuiGasDistributor(InventoryPlayer par1InventoryPlayer, IInventory par2IInventory)
     {
-        super(new ContainerGasAmplifier(par1InventoryPlayer, par2IInventory));
+        super(new ContainerGasDistributor(par1InventoryPlayer, par2IInventory));
         this.playerInvent = par1InventoryPlayer;
         this.chestInvent = par2IInventory;
         //this.something = 133; Apparently unimportant =D
 
     }
-    
+
     @Override
     protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_)
     {

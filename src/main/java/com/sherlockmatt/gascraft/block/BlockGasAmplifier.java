@@ -23,13 +23,11 @@ public class BlockGasAmplifier extends Block implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
 		TileEntityGasAmplifier tileEntity = (TileEntityGasAmplifier) world.getTileEntity(x, y, z);
-		if (tileEntity == null || player.isSneaking()) {
-            return false;
-		}
+		if (tileEntity == null || player.isSneaking()) return false;
 		player.openGui(GasCraft.instance, 0, world, x, y, z);
 		return true;
 	}
-	
+
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister)
     {
@@ -40,11 +38,4 @@ public class BlockGasAmplifier extends Block implements ITileEntityProvider {
 	public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityGasAmplifier();
 	}
-
-	/*
-	Don't think this is necessary any more.
-	@Override
-	public TileEntity func_149915_a(World var1, int var2) {
-		return new TileEntityGasAmplifier();
-	}*/
 }
