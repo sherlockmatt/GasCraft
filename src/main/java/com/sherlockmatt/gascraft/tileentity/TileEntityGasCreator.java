@@ -120,7 +120,7 @@ public class TileEntityGasCreator extends TileEntity{
                     if (tempBlock == Blocks.air) {
                         WeightedRandomCoordinateItem tempWRCI = new WeightedRandomCoordinateItem(evaluateBlock(cC.x+dir.offsetX,cC.y+dir.offsetY,cC.z+dir.offsetZ), tmpC);
                         if (!airMap.contains(tempWRCI) && !blockMap.contains(tempWRCI)) {
-                            airMap.add(tempWRCI);
+                            airMap.add(tempWRCI); //Test
                         }
                     } else if (tempBlock == GameRegistry.findBlock(GasCraft.MODID, "MiningGas") && !gasMapF.contains(tmpC) && !gasMap.contains(tmpC)) {
                         gasMap.add(tmpC);
