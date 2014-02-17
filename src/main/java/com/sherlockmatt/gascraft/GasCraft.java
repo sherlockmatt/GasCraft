@@ -45,15 +45,12 @@ public class GasCraft
     	GameRegistry.registerBlock(new BlockGasDistributor(), "GasDistributor");
     	GameRegistry.registerBlock(new BlockGasAmplifier(), "GasAmplifier");
     	GameRegistry.registerBlock(new BlockMiningGas(), "MiningGas");
+        GameRegistry.registerBlock(BlockPipeGasPipe.class, "GasPipe");
 
     	GameRegistry.registerTileEntity(TileEntityGasAmplifier.class, "GasAmplifier");
         GameRegistry.registerTileEntity(TileEntityGasDistributor.class, "GasDistributor");
     	GameRegistry.registerTileEntity(TileEntityGasCreator.class, "GasCreator");
-        GameRegistry.registerBlock(new BlockPipeGasPipe(), "GasPipe");
-
-    	GameRegistry.registerTileEntity(TileEntityGasAmplifier.class, "GasAmplifier");
-    	GameRegistry.registerTileEntity(TileEntityGasCreator.class, "GasCreator");
-        GameRegistry.registerTileEntity(TileEntityGasPipe.class, "GasPipe");
+    	GameRegistry.registerTileEntity(TileEntityGasPipe.class, "GasPipe");
     	
     	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
     	
