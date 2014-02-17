@@ -7,31 +7,24 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import com.sherlockmatt.gascraft.helpers.MatrixTransformations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BlockPipeGasPipe extends Block implements ITileEntityProvider{
 
-    static class RaytraceResult {
+    /*static class RaytraceResult {
 
         RaytraceResult(MovingObjectPosition movingObjectPosition, AxisAlignedBB boundingBox, ForgeDirection side) {
             this.movingObjectPosition = movingObjectPosition;
@@ -46,22 +39,18 @@ public class BlockPipeGasPipe extends Block implements ITileEntityProvider{
         public String toString() {
             return String.format("RayTraceResult: %s", boundingBox == null ? "null" : boundingBox.toString());
         }
-    }
+    }*/
 
-    @SideOnly(Side.CLIENT)
-    private IIcon altTexture;
-
-    private String[] canConnectTo = {"tile.GasDistributor", "tile.MiningGas", "tile.GasPipe"};
-    private IIcon[] textureMap = {this.blockIcon, this.blockIcon, this.blockIcon, this.blockIcon, this.blockIcon, this.blockIcon};
+    //private String[] canConnectTo = {"tile.GasDistributor", "tile.MiningGas", "tile.GasPipe"};
+    private IIcon[] textureMap = new IIcon[7];
 
     private int renderMask = 0;
-    private static final ForgeDirection[] DIR_VALUES = ForgeDirection.values();
+    private static final ForgeDirection[] DIR_VALUES = ForgeDirection.VALID_DIRECTIONS;
 
     public BlockPipeGasPipe() {
         super(Material.glass);
         this.setCreativeTab(GasCraft.tabGasCraft);
         this.setBlockName("GasPipe");
-        //this.setBlockBounds(0.25f, 0.25f, 0.25f, 0.25f, 0.25f, 0.25f);
     }
 
     @Override
@@ -74,35 +63,34 @@ public class BlockPipeGasPipe extends Block implements ITileEntityProvider{
         return false;
     }
 
+    @Override
+    public int getRenderType() {
+        return GasCraft.pipeModel;
+    }
+
     public void setRenderMask(int mask) {
         renderMask = mask;
     }
 
-    public final void setRenderAllSides() {
-        renderMask = 0x3f;
+    public int getRenderMask() {
+        return renderMask;
     }
 
-    public void setRenderSide(ForgeDirection side, boolean render) {
-        if(render) {
-            renderMask |= 1 << side.ordinal();
-        }
-        else {
-            renderMask &= ~(1 << side.ordinal());
-        }
-    }
     @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess blockAccess, int x, int y, int z, int side) {
-        return (renderMask & (1 << side)) != 0;
+        TileEntity tile = blockAccess.getTileEntity(x, y, z);
+        if (tile instanceof TileEntityGasPipe) {
+            TileEntityGasPipe pipe = (TileEntityGasPipe) tile;
+            return !pipe.isConnected(side);
+        }
+        else {
+            return true;
+        }
     }
 
     @Override
     public boolean isSideSolid(IBlockAccess blockAccess, int x, int y, int z, ForgeDirection side) {
-        /*TileEntity tile = blockAccess.getTileEntity(x, y, z);
-
-        if (tile instanceof ISolidSideTile) {
-
-        }*/
         return true;
     }
 
@@ -121,43 +109,69 @@ public class BlockPipeGasPipe extends Block implements ITileEntityProvider{
         if(tempTile instanceof TileEntityGasPipe) {
             TileEntityGasPipe tile = (TileEntityGasPipe) tempTile;
 
-            if(tile.isPipeConnected(ForgeDirection.WEST)) {
+            if(tile.isConnected(ForgeDirection.WEST)) {
                 setBlockBounds(0.0f, 0.3125f, 0.3125f, 0.6875f, 0.6875f, 0.6875f);
                 super.addCollisionBoxesToList(world, x, y, z, axisalignedBB, arrayList, entity);
             }
 
-            if(tile.isPipeConnected(ForgeDirection.EAST)) {
+            if(tile.isConnected(ForgeDirection.EAST)) {
                 setBlockBounds(0.3125f, 0.3125f, 0.3125f, 1.0f, 0.6875f, 0.6875f);
                 super.addCollisionBoxesToList(world, x, y, z, axisalignedBB, arrayList, entity);
             }
 
-            if(tile.isPipeConnected(ForgeDirection.DOWN)) {
+            if(tile.isConnected(ForgeDirection.DOWN)) {
                 setBlockBounds(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.6875f, 0.6875f);
                 super.addCollisionBoxesToList(world, x, y, z, axisalignedBB, arrayList, entity);
             }
 
-            if(tile.isPipeConnected(ForgeDirection.UP)) {
+            if(tile.isConnected(ForgeDirection.UP)) {
                 setBlockBounds(0.3125f, 0.3125f, 0.3125f, 0.6875f, 1.0f, 0.6875f);
                 super.addCollisionBoxesToList(world, x, y, z, axisalignedBB, arrayList, entity);
             }
 
-            if(tile.isPipeConnected(ForgeDirection.NORTH)) {
+            if(tile.isConnected(ForgeDirection.NORTH)) {
                 setBlockBounds(0.3125f, 0.3125f, 0.0f, 0.6875f, 0.6875f, 0.6875f);
                 super.addCollisionBoxesToList(world, x, y, z, axisalignedBB, arrayList, entity);
             }
 
-            if(tile.isPipeConnected(ForgeDirection.SOUTH)) {
+            if(tile.isConnected(ForgeDirection.SOUTH)) {
                 setBlockBounds(0.3125f, 0.3125f, 0.3125f, 0.6875f, 0.6875f, 1.0f);
                 super.addCollisionBoxesToList(world, x, y, z, axisalignedBB, arrayList, entity);
             }
         }
-        //setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
+        setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
-        RaytraceResult raytraceResult = doRayTrace(world, x, y, z, Minecraft.getMinecraft().thePlayer);
+        float scale = 0.08F;
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile instanceof TileEntityGasPipe) {
+            TileEntityGasPipe pipe = (TileEntityGasPipe) tile;
+            int mask = pipe.getConnectionMask();
+            double[] bb = new double[6];
+            for (ForgeDirection side : DIR_VALUES) {
+                bb[side.ordinal()] = ((mask & (1 << side.ordinal())) != 0) ? 0.3125 - scale : 0.0;
+                bb[side.ordinal()] = side.ordinal() >= 3 ? 1 - bb[side.ordinal()] : bb[side.ordinal()];
+            }
+            return AxisAlignedBB.getAABBPool().getAABB(bb[0], bb[1], bb[2], bb[3], bb[4], bb[5]);
+        }
+        return null;
+    }
+    
+    /*@SideOnly(Side.CLIENT)
+    @Override
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
+        RaytraceResult rayTraceResult = doRayTrace(world, x, y, z, Minecraft.getMinecraft().thePlayer);
+
+        if (rayTraceResult != null && rayTraceResult.boundingBox != null) {
+            AxisAlignedBB box = rayTraceResult.boundingBox;
+            float scale = 0.08F;
+            box = box.expand(scale, scale, scale);
+            return box.getOffsetBoundingBox(x, y, z);
+        }
+        return super.getSelectedBoundingBoxFromPool(world, x, y, z).expand(-0.85F, -0.85F, -0.85F);
     }
 
     private RaytraceResult doRayTrace(World world, int x, int y, int z, EntityPlayer player) {
@@ -185,15 +199,11 @@ public class BlockPipeGasPipe extends Block implements ITileEntityProvider{
         if (tileG == null)
             return null;
 
-        /*Pipe pipe = tileG.pipe;
+        //Pipe pipe = tileG.pipe;
 
-        if (!isValid(pipe))
-            return null;*/
+        //if (!isValid(pipe))
+        //    return null;
 
-        /**
-         * pipe hits along x, y, and z axis, gate (all 6 sides) [and
-         * wires+facades]
-         */
         MovingObjectPosition[] hits = new MovingObjectPosition[25];
         AxisAlignedBB[] boxes = new AxisAlignedBB[25];
         ForgeDirection[] sideHit = new ForgeDirection[25];
@@ -202,7 +212,7 @@ public class BlockPipeGasPipe extends Block implements ITileEntityProvider{
         // pipe
 
         for (ForgeDirection side : DIR_VALUES) {
-            if (side == ForgeDirection.UNKNOWN || tileG.isPipeConnected(side)) {
+            if (side == ForgeDirection.UNKNOWN || tileG.isConnected(side)) {
                 AxisAlignedBB bb = getPipeBoundingBox(side);
                 setBlockBounds(bb);
                 boxes[side.ordinal()] = bb;
@@ -265,7 +275,7 @@ public class BlockPipeGasPipe extends Block implements ITileEntityProvider{
 
         MatrixTransformations.transform(bounds, side);
         return AxisAlignedBB.getAABBPool().getAABB(bounds[0][0], bounds[1][0], bounds[2][0], bounds[0][1], bounds[1][1], bounds[2][1]);
-    }
+    }*/
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
@@ -290,7 +300,11 @@ public class BlockPipeGasPipe extends Block implements ITileEntityProvider{
     @Override
     public int onBlockPlaced(World world, int x, int y, int z, int side, float par6, float par7, float par8, int meta) {
         super.onBlockPlaced(world, x, y, z, side, par6, par7, par8, meta);
-        TileEntityGasPipe pipe = (TileEntityGasPipe) world.getTileEntity(x, y, z);
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (!(tile instanceof TileEntityGasPipe) || tile.isInvalid()) {
+            return meta;
+        }
+        TileEntityGasPipe pipe = (TileEntityGasPipe) tile;
         pipe.onBlockPlaced();
         return meta;
     }
@@ -298,15 +312,24 @@ public class BlockPipeGasPipe extends Block implements ITileEntityProvider{
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
         super.onBlockPlacedBy(world, x, y, z, placer, stack);
-        TileEntityGasPipe pipe = (TileEntityGasPipe) world.getTileEntity(x, y, z);
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (!(tile instanceof TileEntityGasPipe) || tile.isInvalid()) {
+            return;
+        }
+        TileEntityGasPipe pipe = (TileEntityGasPipe) tile;
         pipe.onBlockPlacedBy(placer);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("gascraft:gaspipe");
-        this.altTexture = par1IconRegister.registerIcon("gascraft:gaspipe_conn");
+        for (ForgeDirection dir : DIR_VALUES) {
+            textureMap[dir.ordinal()] = par1IconRegister.registerIcon("gascraft:gaspipe" + dir.ordinal());
+        }
+    }
+
+    public IIcon[] getTextureMap() {
+        return textureMap;
     }
 
     @Override
@@ -321,10 +344,10 @@ public class BlockPipeGasPipe extends Block implements ITileEntityProvider{
         if (!(tile instanceof TileEntityGasPipe)) {
             return null;
         }
-        if (((TileEntityGasPipe) tile).renderState.textureArray != null) {
-            return ((TileEntityGasPipe) tile).renderState.textureArray[side];
+        if (((TileEntityGasPipe) tile).textureArray != null) {
+            return ((TileEntityGasPipe) tile).textureArray[side];
         }
-        return ((TileEntityGasPipe) tile).renderState.currentTexture;
+        return ((TileEntityGasPipe) tile).currentTexture;
     }
 
 }
